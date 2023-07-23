@@ -1,4 +1,3 @@
-import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 import org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
 import org.gradle.plugins.ide.idea.model.IdeaLanguageLevel
 
@@ -28,7 +27,7 @@ allprojects {
     }
 
     val guava: String by project
-
+    val orgJetbrainsAnnotation: String by project
 
     apply(plugin = "io.spring.dependency-management")
     dependencyManagement {
@@ -37,6 +36,7 @@ allprojects {
                 mavenBom(BOM_COORDINATES)
             }
             dependency("com.google.guava:guava:$guava")
+            dependency("org.jetbrains:annotations:$orgJetbrainsAnnotation")
         }
     }
 }
@@ -51,5 +51,13 @@ subprojects {
     tasks.withType<JavaCompile> {
         options.encoding = "UTF-8"
         options.compilerArgs.addAll(listOf("-Xlint:all,-serial,-processing", "-Werror"))
+    }
+
+    tasks.getByName<Test>("test") {
+        useJUnitPlatform()
+        reports {
+            junitXml.required.set(true)
+            html.required.set(true)
+        }
     }
 }
