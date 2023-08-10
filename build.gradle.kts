@@ -28,6 +28,8 @@ allprojects {
 
     val guava: String by project
     val orgJetbrainsAnnotation: String by project
+    val testing: String by project
+    val apacheCommonsLang3: String by project
 
     apply(plugin = "io.spring.dependency-management")
     dependencyManagement {
@@ -37,6 +39,9 @@ allprojects {
             }
             dependency("com.google.guava:guava:$guava")
             dependency("org.jetbrains:annotations:$orgJetbrainsAnnotation")
+            dependency("org.testng:testng:$testing")
+            dependency("org.apache.commons:commons-lang3:$apacheCommonsLang3")
+
         }
     }
 }
