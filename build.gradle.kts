@@ -30,6 +30,9 @@ allprojects {
     val orgJetbrainsAnnotation: String by project
     val testing: String by project
     val apacheCommonsLang3: String by project
+    val projectlombok: String by project
+    val junit: String by project
+    val assertj: String by project
 
     apply(plugin = "io.spring.dependency-management")
     dependencyManagement {
@@ -41,7 +44,9 @@ allprojects {
             dependency("org.jetbrains:annotations:$orgJetbrainsAnnotation")
             dependency("org.testng:testng:$testing")
             dependency("org.apache.commons:commons-lang3:$apacheCommonsLang3")
-
+            dependency("org.projectlombok:lombok:$projectlombok")
+            dependency("org.junit.jupiter:junit-jupiter:$junit")
+            dependency("org.assertj:assertj-core:$assertj")
         }
     }
 }
