@@ -1,6 +1,9 @@
 package ru.otus.model;
 
-@SuppressWarnings({"java:S107", "java:S1135"})
+import java.util.List;
+import java.util.Objects;
+
+@SuppressWarnings({"java:S107", "java:S1135", "unused"})
 public class Message {
     private final long id;
     private final String field1;
@@ -13,8 +16,9 @@ public class Message {
     private final String field8;
     private final String field9;
     private final String field10;
-
-    // todo: 1. Добавить поля field11 - field13 (для field13 используйте класс ObjectForMessage)
+    private final String field11;
+    private final String field12;
+    private final ObjectForMessage field13;
 
     private Message(
             long id,
@@ -27,7 +31,11 @@ public class Message {
             String field7,
             String field8,
             String field9,
-            String field10) {
+            String field10,
+            String field11,
+            String field12,
+            ObjectForMessage field13
+    ) {
         this.id = id;
         this.field1 = field1;
         this.field2 = field2;
@@ -39,6 +47,9 @@ public class Message {
         this.field8 = field8;
         this.field9 = field9;
         this.field10 = field10;
+        this.field11 = field11;
+        this.field12 = field12;
+        this.field13 = field13;
     }
 
     public long getId() {
@@ -85,6 +96,18 @@ public class Message {
         return field10;
     }
 
+    public String getField11() {
+        return field11;
+    }
+
+    public String getField12() {
+        return field12;
+    }
+
+    public ObjectForMessage getField13() {
+        return field13;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -101,9 +124,14 @@ public class Message {
     }
 
     public Builder toBuilder() {
+        var copyOfField13 = new ObjectForMessage();
+        if (!Objects.isNull(field13.getData())) {
+            copyOfField13.setData(List.copyOf(field13.getData()));
+        }
+
         return new Builder(
                 id, field1, field2, field3, field4, field5, field6, field7, field8, field9,
-                field10);
+                field10, field11, field12, copyOfField13);
     }
 
     @Override
@@ -141,6 +169,15 @@ public class Message {
                 + ", field10='"
                 + field10
                 + '\''
+                + ", field11='"
+                + field11
+                + '\''
+                + ", field12='"
+                + field12
+                + '\''
+                + ", field13='"
+                + field13
+                + '\''
                 + '}';
     }
 
@@ -156,6 +193,9 @@ public class Message {
         private String field8;
         private String field9;
         private String field10;
+        private String field11;
+        private String field12;
+        private ObjectForMessage field13;
 
         public Builder(long id) {
             this.id = id;
@@ -172,7 +212,11 @@ public class Message {
                 String field7,
                 String field8,
                 String field9,
-                String field10) {
+                String field10,
+                String field11,
+                String field12,
+                ObjectForMessage field13
+        ) {
             this.id = id;
             this.field1 = field1;
             this.field2 = field2;
@@ -184,6 +228,9 @@ public class Message {
             this.field8 = field8;
             this.field9 = field9;
             this.field10 = field10;
+            this.field11 = field11;
+            this.field12 = field12;
+            this.field13 = field13;
         }
 
         public Builder field1(String field1) {
@@ -236,10 +283,25 @@ public class Message {
             return this;
         }
 
+        public Builder field11(String field11) {
+            this.field11 = field11;
+            return this;
+        }
+
+        public Builder field12(String field12) {
+            this.field12 = field12;
+            return this;
+        }
+
+        public Builder field13(ObjectForMessage field13) {
+            this.field13 = field13;
+            return this;
+        }
+
         public Message build() {
             return new Message(
                     id, field1, field2, field3, field4, field5, field6, field7, field8, field9,
-                    field10);
+                    field10, field11, field12, field13);
         }
     }
 }
