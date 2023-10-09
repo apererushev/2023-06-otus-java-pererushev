@@ -1,10 +1,17 @@
 dependencies {
+    compileOnly("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
+
+    testCompileOnly("org.projectlombok:lombok")
+    testAnnotationProcessor("org.projectlombok:lombok")
+
     implementation ("javax.json:javax.json-api:1.1.4")
     implementation ("com.google.guava:guava")
     implementation ("com.fasterxml.jackson.core:jackson-databind")
     implementation ("javax.json:javax.json-api")
     implementation ("org.glassfish:jakarta.json")
     implementation ("com.google.protobuf:protobuf-java-util")
+    implementation ("org.projectlombok:lombok")
 
     testImplementation ("org.junit.jupiter:junit-jupiter-api")
     testImplementation ("org.junit.jupiter:junit-jupiter-engine")
