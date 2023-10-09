@@ -18,3 +18,4 @@ pluginManagement {
         id("com.github.johnrengelman.shadow") version johnrengelmanShadow
     }
 }
+include("hw07-structuralpatterns")
