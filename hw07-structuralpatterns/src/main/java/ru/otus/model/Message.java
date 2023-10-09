@@ -123,6 +123,10 @@ public class Message {
         return (int) (id ^ (id >>> 32));
     }
 
+    public Message copy() {
+        return this.toBuilder().build();
+    }
+
     public Builder toBuilder() {
         var copyOfField13 = new ObjectForMessage();
         if (!Objects.isNull(field13.getData())) {
