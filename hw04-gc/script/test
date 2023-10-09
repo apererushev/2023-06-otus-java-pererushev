@@ -1,0 +1,26 @@
+#!/bin/bash
+
+rm test.log 2> /dev/null
+
+echo setup -Xms256m -Xmx256m >> test.log
+for i in {1..3}; do java -Xms256m -Xmx256m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./logs/heapdump.hprof -XX:+UseG1GC -Xlog:gc=debug:file=./logs/gc-%p-%t.log:tags,uptime,time,level:filecount=5,filesize=10m -jar ../build/libs/hw04-gc-0.1.jar >> test.log; done
+echo setup -Xms256m -Xmx512m >> test.log
+for i in {1..3}; do java -Xms256m -Xmx512m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./logs/heapdump.hprof -XX:+UseG1GC -Xlog:gc=debug:file=./logs/gc-%p-%t.log:tags,uptime,time,level:filecount=5,filesize=10m -jar ../build/libs/hw04-gc-0.1.jar >> test.log; done
+echo setup -Xms256m -Xmx1024m >> test.log
+for i in {1..3}; do java -Xms256m -Xmx1024m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./logs/heapdump.hprof -XX:+UseG1GC -Xlog:gc=debug:file=./logs/gc-%p-%t.log:tags,uptime,time,level:filecount=5,filesize=10m -jar ../build/libs/hw04-gc-0.1.jar >> test.log; done
+echo setup -Xms256m -Xmx2048m >> test.log
+for i in {1..3}; do java -Xms256m -Xmx2048m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./logs/heapdump.hprof -XX:+UseG1GC -Xlog:gc=debug:file=./logs/gc-%p-%t.log:tags,uptime,time,level:filecount=5,filesize=10m -jar ../build/libs/hw04-gc-0.1.jar >> test.log; done
+echo setup -Xms512m -Xmx512m >> test.log
+for i in {1..3}; do java -Xms512m -Xmx512m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./logs/heapdump.hprof -XX:+UseG1GC -Xlog:gc=debug:file=./logs/gc-%p-%t.log:tags,uptime,time,level:filecount=5,filesize=10m -jar ../build/libs/hw04-gc-0.1.jar >> test.log; done
+echo setup -Xms512m -Xmx1024m >> test.log
+for i in {1..3}; do java -Xms512m -Xmx1024m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./logs/heapdump.hprof -XX:+UseG1GC -Xlog:gc=debug:file=./logs/gc-%p-%t.log:tags,uptime,time,level:filecount=5,filesize=10m -jar ../build/libs/hw04-gc-0.1.jar >> test.log; done
+echo setup -Xms512m -Xmx2048m >> test.log
+for i in {1..3}; do java -Xms512m -Xmx2048m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./logs/heapdump.hprof -XX:+UseG1GC -Xlog:gc=debug:file=./logs/gc-%p-%t.log:tags,uptime,time,level:filecount=5,filesize=10m -jar ../build/libs/hw04-gc-0.1.jar >> test.log; done
+echo setup -Xms1024m -Xmx1024m >> test.log
+for i in {1..3}; do java -Xms1024m -Xmx1024m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./logs/heapdump.hprof -XX:+UseG1GC -Xlog:gc=debug:file=./logs/gc-%p-%t.log:tags,uptime,time,level:filecount=5,filesize=10m -jar ../build/libs/hw04-gc-0.1.jar >> test.log; done
+echo setup -Xms1024m -Xmx2048m >> test.log
+for i in {1..3}; do java -Xms1024m -Xmx2048m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./logs/heapdump.hprof -XX:+UseG1GC -Xlog:gc=debug:file=./logs/gc-%p-%t.log:tags,uptime,time,level:filecount=5,filesize=10m -jar ../build/libs/hw04-gc-0.1.jar >> test.log; done
+echo setup -Xms2048m -Xmx2048m >> test.log
+for i in {1..3}; do java -Xms2048m -Xmx2048m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./logs/heapdump.hprof -XX:+UseG1GC -Xlog:gc=debug:file=./logs/gc-%p-%t.log:tags,uptime,time,level:filecount=5,filesize=10m -jar ../build/libs/hw04-gc-0.1.jar >> test.log; done
+
+grep -E 'spend|setup' test.log
