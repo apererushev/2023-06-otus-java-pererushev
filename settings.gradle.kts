@@ -5,6 +5,8 @@ include("hw02-generics")
 include("hw03-annotation")
 include("hw04-gc")
 include("hw05-byteCodes")
+include("hw07-structuralpatterns")
+include("hw08-io")
 
 pluginManagement {
     val dependencyManagement: String by settings
@@ -18,4 +20,3 @@ pluginManagement {
         id("com.github.johnrengelman.shadow") version johnrengelmanShadow
     }
 }
-include("hw07-structuralpatterns")

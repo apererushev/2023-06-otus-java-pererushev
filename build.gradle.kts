@@ -30,6 +30,8 @@ allprojects {
     val orgJetbrainsAnnotation: String by project
     val testing: String by project
     val apacheCommonsLang3: String by project
+    val protobuf: String by project
+    val jakarta: String by project
     val projectlombok: String by project
 
     apply(plugin = "io.spring.dependency-management")
@@ -42,6 +44,8 @@ allprojects {
             dependency("org.jetbrains:annotations:$orgJetbrainsAnnotation")
             dependency("org.testng:testng:$testing")
             dependency("org.apache.commons:commons-lang3:$apacheCommonsLang3")
+            dependency("com.google.protobuf:protobuf-java-util:$protobuf")
+            dependency("org.glassfish:jakarta.json:$jakarta")
             dependency("org.projectlombok:lombok:$projectlombok")
         }
     }
