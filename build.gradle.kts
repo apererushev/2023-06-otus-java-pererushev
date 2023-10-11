@@ -33,12 +33,15 @@ allprojects {
     val protobuf: String by project
     val jakarta: String by project
     val projectlombok: String by project
+    val logback: String by project
+    val testcontainersBom: String by project
 
     apply(plugin = "io.spring.dependency-management")
     dependencyManagement {
         dependencies {
             imports {
                 mavenBom(BOM_COORDINATES)
+                mavenBom("org.testcontainers:testcontainers-bom:$testcontainersBom")
             }
             dependency("com.google.guava:guava:$guava")
             dependency("org.jetbrains:annotations:$orgJetbrainsAnnotation")
@@ -47,6 +50,9 @@ allprojects {
             dependency("com.google.protobuf:protobuf-java-util:$protobuf")
             dependency("org.glassfish:jakarta.json:$jakarta")
             dependency("org.projectlombok:lombok:$projectlombok")
+            dependency("ch.qos.logback:logback-classic:$logback")
+            //testImplementation("org.testcontainers:postgresql:1.19.1")
+
         }
     }
 }
