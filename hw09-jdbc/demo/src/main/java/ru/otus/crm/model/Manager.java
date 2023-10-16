@@ -1,6 +1,12 @@
 package ru.otus.crm.model;
 
+import ru.otus.crm.annotation.Id;
+import ru.otus.crm.annotation.TableName;
+
+@TableName(value = "cl_manager")
 public class Manager {
+
+    @Id
     private Long no;
     private String label;
     private String param1;
