@@ -1,7 +1,8 @@
 package ru.otus.jdbc.mapper;
 
-import lombok.RequiredArgsConstructor;
+import lombok.Getter;
 import lombok.SneakyThrows;
+import org.jetbrains.annotations.NotNull;
 import ru.otus.crm.annotation.Id;
 import ru.otus.crm.annotation.TableName;
 
@@ -11,10 +12,25 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-@RequiredArgsConstructor
 public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
 
     private final Class<T> clazz;
+    @Getter
+    private final Constructor<T> constructor;
+    @Getter
+    private final Field idField;
+    @Getter
+    private final List<Field> allFields;
+    @Getter
+    private final List<Field> fieldsWithoutId;
+
+    public EntityClassMetaDataImpl(@NotNull final Class<T> clazz) {
+        this.clazz = clazz;
+        this.constructor = initConstructor();
+        this.allFields = initAllFields();
+        this.idField = initIdField();
+        this.fieldsWithoutId = initFieldsWithoutId();
+    }
 
     @Override
     public String getName() {
@@ -26,14 +42,23 @@ public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
         return clazz.getSimpleName().toLowerCase();
     }
 
-    @Override
     @SneakyThrows
-    public Constructor<T> getConstructor() {
+    private Constructor<T> initConstructor() {
         return clazz.getDeclaredConstructor();
     }
 
-    @Override
-    public Field getIdField() {
+    private List<Field> initAllFields() {
+        return Arrays.stream(clazz.getDeclaredFields())
+                .toList();
+    }
+
+    private List<Field> initFieldsWithoutId() {
+        return getAllFields().stream()
+                .filter(f -> Objects.isNull(f.getAnnotation(Id.class)))
+                .toList();
+    }
+
+    private Field initIdField() {
         var idFields = getAllFields().stream()
                 .filter(f -> Objects.nonNull(f.getAnnotation(Id.class)))
                 .toList();
@@ -41,18 +66,5 @@ public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
             throw new NoIdFieldException();
         }
         return idFields.get(0);
-    }
-
-    @Override
-    public List<Field> getAllFields() {
-        return Arrays.stream(clazz.getDeclaredFields())
-                .toList();
-    }
-
-    @Override
-    public List<Field> getFieldsWithoutId() {
-        return getAllFields().stream()
-                .filter(f -> Objects.isNull(f.getAnnotation(Id.class)))
-                .toList();
     }
 }
