@@ -25,16 +25,16 @@ public class ReferenceHandler<V> extends Thread {
 
     @Override
     public void run() {
-        while (true) {
+        while (!Thread.currentThread().isInterrupted()) {
             try {
                 Reference<? extends V> reference = referenceQueue.remove();
                 log.info("Collect: {}", reference);
                 onCollected.accept(reference);
                 log.info("Run: {}", onCollected);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                log.error(e.getMessage());
+                log.debug(e.getMessage(), e);
                 Thread.currentThread().interrupt();
-                break;
             }
         }
     }
