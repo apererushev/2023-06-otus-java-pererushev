@@ -35,6 +35,7 @@ allprojects {
     val projectlombok: String by project
     val logback: String by project
     val testcontainersBom: String by project
+    val slf4j: String by project
 
     apply(plugin = "io.spring.dependency-management")
     dependencyManagement {
@@ -50,12 +51,14 @@ allprojects {
             dependency("com.google.protobuf:protobuf-java-util:$protobuf")
             dependency("org.glassfish:jakarta.json:$jakarta")
             dependency("org.projectlombok:lombok:$projectlombok")
-            dependency("ch.qos.logback:logback-classic:$logback")
+            //dependency("ch.qos.logback:logback-classic:$logback")
+            dependency("org.slf4j:slf4j-api:$slf4j")
             //testImplementation("org.testcontainers:postgresql:1.19.1")
 
         }
     }
 }
+
 
 subprojects {
     plugins.apply(JavaPlugin::class.java)

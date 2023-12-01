@@ -9,6 +9,7 @@ include("hw07-structuralpatterns")
 include("hw08-io")
 include("hw09-jdbc:demo")
 include("hw09-jdbc:homework")
+include("hw10-jpql")
 
 pluginManagement {
     val dependencyManagement: String by settings
