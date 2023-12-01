@@ -18,8 +18,6 @@ import java.util.Optional;
 public class Client implements Cloneable {
 
     @Id
-    //@SequenceGenerator(name = "client_gen", sequenceName = "client_seq", initialValue = 1, allocationSize = 1)
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_gen")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
@@ -49,8 +47,11 @@ public class Client implements Cloneable {
         this.name = name;
         this.address = address;
         if (Objects.nonNull(phones)) {
-            this.phones = phones;
-            this.phones.forEach(p -> p.setClient(this));
+            phones.forEach(p -> {
+                var client = new Phone(p.getId(), p.getNumber());
+                client.setClient(this);
+                this.phones.add(client);
+            });
         }
     }
 
